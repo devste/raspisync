@@ -1,0 +1,7 @@
+config BR2_PACKAGE_SYNCTHING
+	bool "Syncthing (ARM binary)"
+	depends on BR2_arm
+	help
+	  Syncthing is a decentralised, encrypted file synchronisation software.
+	  This is the binary-only package built for arm.
+	  https://syncthing.net/

@@ -10,7 +10,6 @@ Development of this project has just started, so many rough edges and not even a
 
 Next steps:
 * Installation and upgrade script for SD card
-* Integration of binary (arm) version of Syncthing
 
 Building
 --------
@@ -43,5 +42,8 @@ Using
 There is not much to do with the current state of the project.
 
 * Find out the IP address of your Raspberry Pi
-* Enter with ssh root@raspisync
-* The root password is set to "raspisync"
+* Enter with ssh syncthing@raspisync (password: syncthing)
+* Start syncthing
+
+* Change the webinterface access to 0.0.0.0:8384 in /home/syncthing/.config/syncthing/config.xml
+* Use your browser to connect to raspisync:8384
