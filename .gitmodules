@@ -1,0 +1,3 @@
+[submodule "board/raspisync/bsfl"]
+	path = board/raspisync/bsfl
+	url = https://github.com/SkypLabs/bsfl.git
