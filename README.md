@@ -45,3 +45,11 @@ There is not much to do with the current state of the project.
 
 * Change the webinterface access to 0.0.0.0:8384 in /home/syncthing/.config/syncthing/config.xml
 * Use your browser to connect to raspisync:8384
+
+Tools
+-----
+
+The following command will be able to tell you if your SD card is properly set up. It will find the Raspisync SD card plugged into your system.
+
+	# can be run as non-root user
+	board/raspisync/check-sdcard.sh
