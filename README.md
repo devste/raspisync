@@ -16,7 +16,7 @@ Building
 
 	git clone git://github.com/devste/raspisync.git
 	cd raspisync
-	make raspisync_defconfig
+	make raspi2sync_defconfig
 	make menuconfig		# if you want to add packages or fiddle around with it
 	make			# build (NOTICE: Don't use the **-j** switch, it's set to auto-detect)
 
