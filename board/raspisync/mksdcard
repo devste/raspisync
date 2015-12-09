@@ -117,9 +117,6 @@ confirm
 
 section "Partitioning SD card..."
 
-## IMPORTANT: the rootfs has to be at least 600M, reason is not known at the moment.
-## This does not depend on the size of the rootfs.tar, as this is usually around 70M.
-
 ${FDISK} ${SDCARD} <<END
 o
 n
@@ -131,7 +128,7 @@ n
 p
 2
 
-+600M
++200M
 n
 p
 3
