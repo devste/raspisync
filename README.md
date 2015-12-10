@@ -52,7 +52,10 @@ Load your SSH public key onto the SD card by following these steps.
 
 After creating the SD card insert it into Raspberry Pi and boot the Raspberry Pi. You might have to boot once, then unplug the power from the Raspberry Pi and then boot it again and only then will it boot properly with network access.
 
-You can update the SD card by using the following command. The SD card will not touch the third partition (raspisynchome) and will only overwrite files on the other partitions, but never delete anything. This will also preserve the host's public ssh key.
+Updating SD card
+----------------
+
+You can update the SD card by using the following command. The script will not touch the third partition (raspisynchome) and will only overwrite files on the other partitions, but never delete anything. As a side effect this will also preserve the host's public ssh key.
 
     sudo ./board/raspisync/udsdcard /dev/mmcblk0
 
