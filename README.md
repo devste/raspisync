@@ -9,7 +9,8 @@ Status
 Development of this project has just started, so many rough edges and not even an inkling of a release schedule.
 
 Next steps:
-* Upgrade script for SD card (to only upgrade the system, but not the data partition)
+* Shell helper scripts to configure syncthing from the commandline
+* Init script
 
 Building
 --------
@@ -23,28 +24,33 @@ Building
 Deploying
 ---------
 
-I've added a script that can automatically flash your sdcard, you simply need
-to point it to the correct device node, confirm and you're done!
-
-**Notice** you will need to replace *mmcblk0* in the following commands with the
-actual device node for your sdcard.
+To create and **overwrite** an SD card with raspisync run the following script.
 
     # run the following as root (sudo)
     board/raspisync/mksdcard /dev/mmcblk0
+    
+**Notice** you will need to replace *mmcblk0* with the actual device node for your sdcard.
 
-After creating the SD card insert it into Raspberry Pi and run the distribution.
+Load your SSH public key onto the SD card by following these steps. All steps will require root/sudo.
+* mkdir /mnt/raspisynchome
+* mount /dev/mmcblk0p3 /mnt/raspisynchome (the third partition on the SD card)
+* mkdir /mnt/raspihome
+* cat ~/.ssh/id_rsa.pub >> /mnt/raspihome/.ssh/authorized_keys
+* umount /mnt/raspisynchome
+
+After creating the SD card insert it into Raspberry Pi and boot the Raspberry Pi. You might have to boot once, then unplug the power from the Raspberry Pi and then boot it again and only then will it boot properly with network access.
+
+You can update the SD card by using the following command. The SD card will not touch the third partition (raspisynchome) and will only overwrite files on the other partitions, but never delete anything. This will also preserve the host's public ssh key.
+
+    board/raspisync/udsdcard /dev/mmcblk0
 
 Using
 -----
 
-There is not much to do with the current state of the project.
-
-
-* Connect with 'ssh syncthing@raspisync' (password: syncthing). Assuming you are on the same network as the raspisync
-* Start syncthing
-
-* Change the webinterface access to 0.0.0.0:8384 in /home/syncthing/.config/syncthing/config.xml
-* Use your browser to connect to raspisync:8384
+You can setup the configuration for Syncthing by following these steps:
+* Connect with 'ssh syncthing@raspisync'. It should use the SSH public key you supplied when setting up the SD card.
+* Run syncthing-config.sh
+* Run syncthing
 
 Tools
 -----
