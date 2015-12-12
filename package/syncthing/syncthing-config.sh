@@ -7,13 +7,12 @@ ST_CONF_DIR=${HOME}/.config/syncthing
 ST_CONF=${ST_CONF_DIR}/config.xml
 
 if [ -e ${ST_CONF} ]; then
-	echo "Configuration file exists already. Will not overwrite an existing configuration. Exiting."
+	echo "Configuration file exists already. Will modify existing configuration file."
 	echo "File: ${ST_CONF}"
-	exit 1
+else
+	echo "Creating key and configuration file"
+	${ST_BIN} --generate=${ST_CONF_DIR}
 fi
-
-echo "Setting up key and config"
-${ST_BIN} --generate=${ST_CONF_DIR}
 
 # Change directory due to all the backup files created
 cd ${ST_CONF_DIR}
@@ -26,3 +25,6 @@ sed -i.autoupdate.bak -r 's/<autoUpgradeIntervalH>.+?<\/autoUpgradeIntervalH>/<a
 
 echo "Disabling UPnP"
 sed -i.upnp.bak -r 's/<upnpEnabled>true<\/upnpEnabled>/<upnpEnabled>false<\/upnpEnabled>/' ${ST_CONF}
+
+echo "Disabling browser start"
+sed -i.browser.bak -r 's/<startBrowser>true<\/startBrowser>/<startBrowser>false<\/startBrowser>/' ${ST_CONF}
