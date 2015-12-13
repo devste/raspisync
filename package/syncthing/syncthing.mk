@@ -10,7 +10,7 @@ SYNCTHING_LICENSE = Mozilla Public License Version 2.0
 SYNCTHING_LICENSE_FILES = LICENSE.txt
 
 define SYNCTHING_USERS
-        syncthing 8384 syncthing 8384 - /home/syncthing /bin/sh -
+        syncthing 8384 syncthing 8384 * /home/syncthing /bin/sh -
 endef
 
 define SYNCTHING_PERMISSIONS
