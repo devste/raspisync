@@ -2,7 +2,7 @@
 # Syncthing (arm binary)
 ###
 
-SYNCTHING_VERSION = 0.12.6
+SYNCTHING_VERSION = 0.12.8
 SYNCTHING_SOURCE = syncthing-linux-arm-v$(SYNCTHING_VERSION).tar.gz
 SYNCTHING_SITE = https://github.com/syncthing/syncthing/releases/download/v$(SYNCTHING_VERSION)
 
