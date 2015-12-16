@@ -1,7 +1,7 @@
 Raspberry Pi with Syncthing
 ===========================
 
-This is a project to provide Raspberry Pi with Syncthing installed. This is a buildroot *overlay* over rpi-buildroot.
+This is a project to provide Raspberry Pi with Syncthing installed. This is a buildroot *overlay*, based on rpi-buildroot (now downstreaming directly from the official buildroot sources).
 
 Status
 ------
@@ -9,7 +9,6 @@ Status
 Development of this project has just started, so many rough edges and not even an inkling of a release schedule.
 
 Next steps:
-* Shell helper scripts to configure syncthing from the commandline
 * Init script
 
 Building
