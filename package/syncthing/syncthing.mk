@@ -22,6 +22,8 @@ endef
 define SYNCTHING_INSTALL_TARGET_CMDS
 	$(INSTALL) $(@D)/syncthing $(TARGET_DIR)/usr/bin
 	$(INSTALL) package/syncthing/syncthing-config.sh $(TARGET_DIR)/usr/bin
+	$(INSTALL) package/syncthing/syncthing-wrapped.sh $(TARGET_DIR)/usr/bin
+	$(INSTALL) package/syncthing/S60syncthing $(TARGET_DIR)/etc/init.d
 endef
 
 $(eval $(generic-package))
