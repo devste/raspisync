@@ -6,10 +6,7 @@ This is a project to provide Raspberry Pi with Syncthing installed. This is a bu
 Status
 ------
 
-Development of this project has just started, so many rough edges and not even an inkling of a release schedule.
-
-Next steps:
-* Init script
+Development of this project has just started, see the preliminary plans under https://github.com/devste/raspisync/milestones
 
 Building
 --------
@@ -39,17 +36,17 @@ To create and **overwrite** an SD card with raspisync run the following script.
     
 **Notice** you will need to replace *mmcblk0* with the actual device node for your sdcard.
 
-Load your SSH public key onto the SD card by following these steps.
+Load your SSH public key onto the SD card to allow root access.
 
     sudo mkdir /mnt/raspisynchome
     sudo mount /dev/mmcblk0p3 /mnt/raspisynchome	# the third partition on the SD card
-    sudo mkdir -m 700 /mnt/raspihome/syncthing/.ssh
-    sudo chown 8384:8384 /mnt/raspihome/syncthing/.ssh
-    sudo cat ~/.ssh/id_rsa.pub >> /mnt/raspihome/.ssh/authorized_keys
-    sudo chown 8384:8384 /mnt/raspihome/syncthing/.ssh/authorized_keys
+    sudo mkdir -m 700 /mnt/raspihome/root/.ssh
+    sudo cat ~/.ssh/id_rsa.pub >> /mnt/raspihome/root/.ssh/authorized_keys
     sudo umount /mnt/raspisynchome
 
-After creating the SD card insert it into Raspberry Pi and boot the Raspberry Pi. You might have to boot once, then unplug the power from the Raspberry Pi and then boot it again and only then will it boot properly with network access.
+After creating the SD card insert it into Raspberry Pi and boot the Raspberry Pi. 
+
+Under some circumstances you might have to boot once, then unplug the power from the Raspberry Pi and then boot it again and only then will it boot properly with network access.
 
 Updating SD card
 ----------------
@@ -61,15 +58,16 @@ You can update the SD card by using the following command. The script will not t
 Using
 -----
 
-You can setup the configuration for Syncthing by following these steps.
+The raspisync comes preloaded with an init-script that starts syncthing automatically. If syncthing hasn't been configured yet, it will also start the configuration script. Should this fail, then you can run the script manually by following these commands:
 
-    ssh syncthing@raspisync	# It should use the SSH public key you supplied when setting up the SD card.
+    ssh root@raspisync	# It should use the SSH public key you supplied when setting up the SD card.
     syncthing-config.sh
-    syncthing &
+    exit
+    /etc/init.d/S60syncthing start
 
 Tools
 -----
 
-The following command will be able to tell you if your SD card is properly set up. It will find the Raspisync SD card plugged into your system.
+The following command can be used on the host system to tell you wether your SD card is properly set up with raspisync. It looks at the partitions on the SD card to determine if this is the case.
 
     ./board/raspisync/check-sdcard.sh
