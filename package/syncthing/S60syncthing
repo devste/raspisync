@@ -1,0 +1,40 @@
+#!/bin/sh
+#
+# Starts syncthing.
+#
+
+start(){
+	# If syncthing hasn't been configured yet, run the default configuration setup
+	if [ ! -e /home/syncthing/.config/syncthing/config.xml ]; then
+		su -l -c /usr/bin/syncthing-config.sh syncthing
+	fi
+	# start-stop-daemon should not use a pid file. Syncthing can restart
+	# itself automatically (web interface) and will change the process id
+	start-stop-daemon -S --quiet --exec /usr/bin/syncthing-wrapped.sh
+}
+
+stop(){
+	start-stop-daemon -K -q -x /usr/bin/syncthing -u 8384
+}
+
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart|reload)
+  	restart
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?
