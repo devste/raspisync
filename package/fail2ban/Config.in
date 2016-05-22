@@ -1,0 +1,9 @@
+config BR2_PACKAGE_FAIL2BAN
+	bool "fail2ban"
+	depends on BR2_PACKAGE_PYTHON
+	help
+	  fail2ban watches log files and bans IPs with too many logins
+	  http://www.fail2ban.org/
+
+comment "supervisor needs the python interpreter"
+        depends on !BR2_PACKAGE_PYTHON
