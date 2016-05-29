@@ -21,9 +21,9 @@ endef
 # see: https://github.com/buildroot/buildroot/commit/235423870be6d9a97431eedac39ccd60eca17e25)
 define SYNCTHING_INSTALL_TARGET_CMDS
 	$(INSTALL) $(@D)/syncthing $(TARGET_DIR)/usr/bin
-	$(INSTALL) package/syncthing/syncthing-config.sh $(TARGET_DIR)/usr/bin
-	$(INSTALL) package/syncthing/syncthing-wrapped.sh $(TARGET_DIR)/usr/bin
-	$(INSTALL) package/syncthing/S60syncthing $(TARGET_DIR)/etc/init.d
+	$(INSTALL) $(BR2_EXTERNAL)/package/syncthing/syncthing-config.sh $(TARGET_DIR)/usr/bin
+	$(INSTALL) $(BR2_EXTERNAL)/package/syncthing/syncthing-wrapped.sh $(TARGET_DIR)/usr/bin
+	$(INSTALL) $(BR2_EXTERNAL)/package/syncthing/S60syncthing $(TARGET_DIR)/etc/init.d
 endef
 
 $(eval $(generic-package))
