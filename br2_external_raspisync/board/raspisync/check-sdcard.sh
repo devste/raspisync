@@ -72,5 +72,5 @@ part_boot="${devscheme}1"
 part_root="${devscheme}2"
 part_home="${devscheme}3"
 check_part "Raspisync boot" ${part_boot} vfat RASPISYNC 32
-check_part "Raspisync root" ${part_root} ext4 raspisyncRoot 600
+check_part "Raspisync root" ${part_root} ext4 raspisyncRoot 200
 check_part "Raspisync home" ${part_home} ext4 raspisyncHome 0
