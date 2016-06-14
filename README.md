@@ -23,7 +23,7 @@ Download and build
     # none of these require root, execute as normal user
     git clone git://github.com/devste/raspisync.git
     cd raspisync
-    make raspi2sync_defconfig
+    make BR2_EXTERNAL=br2_external_raspisync/ raspi2sync_defconfig
     make menuconfig	# not required, only if you want to change packages or configuration
     make
 
@@ -32,7 +32,7 @@ Deploying
 
 To create and **overwrite** an SD card with raspisync run the following script.
 
-    sudo ./board/raspisync/mksdcard /dev/mmcblk0
+    sudo ./br2_external_raspisync/board/raspisync/mksdcard /dev/mmcblk0
     
 **Notice** you will need to replace *mmcblk0* with the actual device node for your sdcard.
 
