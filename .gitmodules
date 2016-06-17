@@ -1,3 +1,6 @@
 [submodule "br2_external_raspisync/board/raspisync/bsfl"]
 	path = br2_external_raspisync/board/raspisync/bsfl
 	url = https://github.com/SkypLabs/bsfl.git
+[submodule "buildroot"]
+	path = buildroot
+	url = git://git.buildroot.net/buildroot
