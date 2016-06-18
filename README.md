@@ -1,7 +1,7 @@
 Raspberry Pi with Syncthing
 ===========================
 
-This is a project to provide Raspberry Pi with Syncthing installed. This is a buildroot *overlay*, based on rpi-buildroot (now downstreaming directly from the official buildroot sources).
+This is a project to provide Raspberry Pi with Syncthing installed.
 
 Status
 ------
@@ -13,18 +13,20 @@ Building
 
 You will need the buildroot requirements to start cross-compiling raspisync. See here: https://buildroot.org/downloads/manual/manual.html#requirement-mandatory.
 
-On Ubuntu 15.04 I found it sufficient to install
+On Ubuntu 16.04 it should be sufficient to install
 
     sudo apt-get install build-essential
-    sudo apt-get install libncurses5-dev	# for make menuconfig
+    # If you want to use make menuconfig, install the following:
+    sudo apt-get install libncurses5-dev
 
 Download and build
 
     # none of these require root, execute as normal user
     git clone git://github.com/devste/raspisync.git
     cd raspisync
-    make BR2_EXTERNAL=br2_external_raspisync/ raspi2sync_defconfig
-    make menuconfig	# not required, only if you want to change packages or configuration
+    make prepare
+    # if you want to change some configuration
+    cd buildroot && make menuconfig && cd ..
     make
 
 Deploying
@@ -32,7 +34,7 @@ Deploying
 
 To create and **overwrite** an SD card with raspisync run the following script.
 
-    sudo ./br2_external_raspisync/board/raspisync/mksdcard /dev/mmcblk0
+    sudo ./sdcard-tools/mksdcard /dev/mmcblk0
     
 **Notice** you will need to replace *mmcblk0* with the actual device node for your sdcard.
 
@@ -46,14 +48,12 @@ Load your SSH public key onto the SD card to allow root access.
 
 After creating the SD card insert it into Raspberry Pi and boot the Raspberry Pi. 
 
-Under some circumstances you might have to boot once, then unplug the power from the Raspberry Pi and then boot it again and only then will it boot properly with network access.
-
 Updating SD card
 ----------------
 
 You can update the SD card by using the following command. The script will not touch the third partition (raspisynchome) and will only overwrite files on the other partitions, but never delete anything. As a side effect this will also preserve the host's public ssh key.
 
-    sudo ./board/raspisync/udsdcard /dev/mmcblk0
+    sudo ./sdcard-tools/udsdcard /dev/mmcblk0
 
 Using
 -----
@@ -70,4 +70,9 @@ Tools
 
 The following command can be used on the host system to tell you wether your SD card is properly set up with raspisync. It looks at the partitions on the SD card to determine if this is the case.
 
-    ./board/raspisync/check-sdcard.sh
+    ./sdcard-tools/check-sdcard.sh
+
+History
+-------
+
+This project started as a fork or rpi-buildroot, then integrated the official buildroot sources. Now it is organised with buildroot as a submodule.
