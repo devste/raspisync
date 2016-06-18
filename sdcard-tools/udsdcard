@@ -41,7 +41,7 @@ section() {
 # environment overrides
 
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-OUTPUT_PREFIX=""
+OUTPUT_PREFIX="../buildroot/output/"
 
 # check parameters
 
@@ -102,7 +102,7 @@ fi
 
 # sanity check
 
-if [ ! -d "images/rpi-firmware" ] || [ ! -f "images/rootfs.tar" ]; then
+if [ ! -d "${OUTPUT_PREFIX}/images/rpi-firmware" ] || [ ! -f "${OUTPUT_PREFIX}/images/rootfs.tar" ]; then
 	if [ -d "output/images/rpi-firmware" ] && [ -f "output/images/rootfs.tar" ]; then
 		OUTPUT_PREFIX="output/"
 	else
