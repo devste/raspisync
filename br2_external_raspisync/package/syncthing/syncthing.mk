@@ -4,7 +4,7 @@
 #
 ###
 
-SYNCTHING_VERSION = 0.13.7
+SYNCTHING_VERSION = 0.14.0
 SYNCTHING_SOURCE = syncthing-source-v$(SYNCTHING_VERSION).tar.gz
 SYNCTHING_SITE = https://github.com/syncthing/syncthing/releases/download/v$(SYNCTHING_VERSION)
 
