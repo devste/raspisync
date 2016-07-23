@@ -31,21 +31,20 @@ define SYNCTHING_BUILD_CMDS
                 run build.go build syncthing
 endef
 
+# For raspisync: install the user "syncthing" and set the permissions accordingly
 define SYNCTHING_USERS
         syncthing 8384 syncthing 8384 * /home/syncthing /bin/sh -
 endef
-
 define SYNCTHING_PERMISSIONS
         /home/syncthing d 700 8384 8384 - - - - -
 endef
 
-# TODO: use $(SYNCTHING_PKGDIR) once rpi-buildroot has been updated to buildroot 2015.11
-# see: https://github.com/buildroot/buildroot/commit/235423870be6d9a97431eedac39ccd60eca17e25)
 define SYNCTHING_INSTALL_TARGET_CMDS
 	$(INSTALL) $(@D)/src/github.com/syncthing/syncthing/syncthing $(TARGET_DIR)/usr/bin
-	$(INSTALL) $(BR2_EXTERNAL)/package/syncthing/syncthing-config.sh $(TARGET_DIR)/usr/bin
-	$(INSTALL) $(BR2_EXTERNAL)/package/syncthing/syncthing-wrapped.sh $(TARGET_DIR)/usr/bin
-	$(INSTALL) $(BR2_EXTERNAL)/package/syncthing/S60syncthing $(TARGET_DIR)/etc/init.d
+# These three actions are raspisync-specific
+	$(INSTALL) $(SYNCTHING_PKGDIR)/syncthing-config.sh $(TARGET_DIR)/usr/bin
+	$(INSTALL) $(SYNCTHING_PKGDIR)/syncthing-wrapped.sh $(TARGET_DIR)/usr/bin
+	$(INSTALL) $(SYNCTHING_PKGDIR)/S60syncthing $(TARGET_DIR)/etc/init.d
 endef
 
 $(eval $(generic-package))
