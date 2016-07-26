@@ -13,6 +13,24 @@ Building
 
 You will need the buildroot requirements to start cross-compiling raspisync. See here: https://buildroot.org/downloads/manual/manual.html#requirement-mandatory.
 
+Vagrant workflow
+----------------
+
+This is the suggested workflow. It will download quite a bit of data, so best be on a fixed line and be prepared to drink some coffee.
+
+    git clone git://github.com/devste/raspisync.git
+    cd raspisync
+    vagrant up
+    vagrant ssh
+    cd raspisync
+    git submodule init
+    git submodule update
+    make prepare
+    make
+
+Development host workflow
+-------------------------
+
 On Ubuntu 16.04 it should be sufficient to install
 
     sudo apt-get install build-essential
@@ -24,6 +42,8 @@ Download and build
     # none of these require root, execute as normal user
     git clone git://github.com/devste/raspisync.git
     cd raspisync
+    git submodule init
+    git submodule update
     make prepare
     # if you want to change some configuration
     cd buildroot && make menuconfig && cd ..
